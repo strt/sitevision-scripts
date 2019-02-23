@@ -1,0 +1,6 @@
+{
+  "extends": "strateg",
+  "env": {
+    "node": true
+  }
+}

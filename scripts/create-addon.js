@@ -1,6 +1,6 @@
 const got = require('got');
 const arg = require('arg');
-const { readManifest } = require('../lib/utils');
+const readManifest = require('../lib/read-manifest');
 const { baseUrl } = require('../config/paths');
 
 (async () => {

@@ -5,7 +5,7 @@ const path = require('path');
 const arg = require('arg');
 const execa = require('execa');
 const paths = require('../config/paths');
-const { readManifest } = require('../lib/utils');
+const readManifest = require('../lib/read-manifest');
 
 (async () => {
   const args = arg({

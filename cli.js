@@ -3,7 +3,7 @@
 require('dotenv').config();
 const arg = require('arg');
 const execa = require('execa');
-const { readManifest } = require('./lib/utils');
+const readManifest = require('./lib/read-manifest');
 
 process.on('unhandledRejection', (error) => {
   console.log(error);

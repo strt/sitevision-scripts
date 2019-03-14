@@ -2,8 +2,8 @@
 
 require('dotenv').config();
 const arg = require('arg');
+const fs = require('fs-extra');
 const execa = require('execa');
-const readManifest = require('./lib/read-manifest');
 
 process.on('unhandledRejection', (error) => {
   console.log(error);
@@ -32,7 +32,7 @@ process.on('unhandledRejection', (error) => {
   const command = args._.find(cmd => commands.includes(cmd));
 
   if (args['--version']) {
-    const { version } = await readManifest();
+    const { version } = await fs.readJson('package.json');
     console.log(`v${version}`);
     process.exit(0);
   }

@@ -5,7 +5,6 @@ const arg = require('arg');
 const execa = require('execa');
 const FormData = require('form-data');
 const paths = require('../config/paths');
-const { readJsonFile } = require('../lib/utils');
 
 (async () => {
   if (
@@ -60,7 +59,7 @@ Options
     });
   }
 
-  const { id, type } = await readJsonFile(paths.appManifest);
+  const { id, type } = await fs.readJson(paths.appManifest);
 
   let url = `${paths.baseUrl}/${id}`;
   if (type === 'WebApp') {

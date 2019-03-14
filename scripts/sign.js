@@ -4,7 +4,6 @@ const FormData = require('form-data');
 const inquirer = require('inquirer');
 const arg = require('arg');
 const paths = require('../config/paths');
-const { readJsonFile } = require('../lib/utils');
 
 (async () => {
   const args = arg({
@@ -48,7 +47,7 @@ Options
 
   try {
     const answers = await inquirer.prompt(questions);
-    const { id } = await readJsonFile(paths.appManifest);
+    const { id } = await fs.readJson(paths.appManifest);
 
     const formData = new FormData();
     formData.append('file', fs.createReadStream(paths.getBundle(id)));

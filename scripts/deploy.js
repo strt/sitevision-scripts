@@ -5,6 +5,7 @@ const arg = require('arg');
 const execa = require('execa');
 const FormData = require('form-data');
 const paths = require('../config/paths');
+const getBranch = require('../lib/git-branch');
 
 (async () => {
   if (
@@ -23,11 +24,13 @@ const paths = require('../config/paths');
     // Types
     '--help': Boolean,
     '--force': Boolean,
+    '--staging': Boolean,
     '--production': Boolean,
 
     // Aliases
     '-h': '--help',
     '-f': '--force',
+    '-s': '--staging',
     '-p': '--production',
   });
 
@@ -42,6 +45,7 @@ Usage
 Options
   --force, -f         Force deploy (overwrites existing addon)
   --production, -p    Deploys signed addon (production)
+  --staging, -s       Deploys and suffixes addon name with the current branch
   --help, -h          Displays this message
     `);
     process.exit(0);
@@ -59,10 +63,19 @@ Options
     });
   }
 
-  const { id, type } = await fs.readJson(paths.appManifest);
+  const manifest = await fs.readJson(paths.appManifest);
+
+  let { id } = manifest;
+  if (args['--staging']) {
+    const branch = await getBranch();
+
+    if (branch !== 'master') {
+      id = `${id}-${branch}`;
+    }
+  }
 
   let url = `${paths.baseUrl}/${id}`;
-  if (type === 'WebApp') {
+  if (manifest.type === 'WebApp') {
     url += '/webAppImport';
   } else {
     url += '/restAppImport';

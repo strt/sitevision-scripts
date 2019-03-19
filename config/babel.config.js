@@ -1,6 +1,4 @@
-module.exports = (api) => {
-  const isProduction = api.env('production');
-
+module.exports = () => {
   return {
     presets: [
       [
@@ -10,8 +8,7 @@ module.exports = (api) => {
           loose: true,
         },
       ],
-      isProduction && 'minify',
-    ].filter(Boolean),
+    ],
     plugins: [
       ['@babel/plugin-proposal-class-properties', { loose: true }],
       '@babel/plugin-transform-object-assign',

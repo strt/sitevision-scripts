@@ -1,6 +1,6 @@
 {
   "name": "sitevision-scripts",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "description": "Scripts for building and deploying SiteVision addons.",
   "files": [
     "config",

@@ -74,11 +74,11 @@ Options
     }
   }
 
-  let url = `${paths.baseUrl}/${id}`;
+  let url = `${paths.baseUrl}`;
   if (manifest.type === 'WebApp') {
-    url += '/webAppImport';
+    url += `/${encodeURIComponent(manifest.name)}/webAppImport`;
   } else {
-    url += '/restAppImport';
+    url += `/${id}/restAppImport`;
   }
 
   const query = new URLSearchParams();
